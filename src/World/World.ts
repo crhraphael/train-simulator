@@ -1,7 +1,8 @@
 import chalk from 'chalk';
 import ISimulatorEntity from '../Simulator/ISimulatorEntity';
+import ASimulatorEntity from '../Simulator/ASimulatorEntity';
 
-export default class World {
+export default class World extends ASimulatorEntity {
 	width : number = 100;
 
 	height : number = 100;
@@ -15,6 +16,7 @@ export default class World {
 	];
 
 	constructor() {
+		super();
 		this.matrix = [];
 	}
 
