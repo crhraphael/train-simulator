@@ -1,0 +1,14 @@
+Dockerfile
+README.md
+npm-debug.log
+
+tests-jest
+
+scripts
+
+.vscode
+.nyc_output
+node_modules
+
+functions
+functions-ts

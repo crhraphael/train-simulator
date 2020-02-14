@@ -1,0 +1,59 @@
+{
+  "env": {
+    "es6": true,
+    "node": true
+  },
+  "extends": [
+    "airbnb-typescript/base"
+  ],
+  "globals": {
+    "Atomics": "readonly",
+    "SharedArrayBuffer": "readonly"
+  },
+  "parser": "@typescript-eslint/parser",
+  "parserOptions": {
+    "ecmaVersion": 2018
+  },
+  "plugins": [
+    "@typescript-eslint"
+  ],
+  "rules": {
+		"consistent-return": "off",
+    "quotes": [2, "single"],
+    "import/prefer-default-export": "off",
+    "radix": "off",
+    "guard-for-in": "off",
+    "no-restricted-syntax": "off",
+    "global-require": "off",
+    "no-useless-catch": "off",
+		"no-console": "off",
+		"max-len": "off",
+    "@typescript-eslint/no-use-before-define": "off",
+    "class-methods-use-this": "off",
+    "no-plusplus": "off",
+    "no-nested-ternary": "off",
+    "@typescript-eslint/no-unused-vars": "off",
+    "max-classes-per-file": "off",
+    "import/no-dynamic-require": "off",
+		"no-underscore-dangle": "off",
+		"no-dupe-class-members": "off",
+		"no-continue": "warn",
+		"import/no-extraneous-dependencies": "off",
+		"no-tabs": "off",
+		"indent": "off",
+		"no-async-promise-executor": "off",
+		"semi": "off",
+		"@typescript-eslint/indent": ["error", "tab"]
+  },
+  "settings": {
+    "import/parsers": {
+      "@typescript-eslint/parser": [".ts", ".tsx"]
+    },
+    "import/resolver": {
+      "babel-module": {
+        "extensions": [".js", ".jsx", ".ts", ".tsx"]
+      }
+
+    }
+  }
+}

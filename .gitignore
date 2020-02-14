@@ -1,0 +1,26 @@
+# Dependencies
+/node_modules
+
+# Distribution directories
+/build
+
+# Editor
+/.vscode
+
+# Tests
+/.nyc_output
+/coverage
+
+# App env-file
+.env
+
+# Firebase env-file and log
+.firebaserc
+firebase-debug.log
+
+# Developer-only file
+.developer
+
+# Auto-generate client
+openapi.yaml
+client

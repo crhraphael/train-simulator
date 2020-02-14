@@ -1,0 +1,53 @@
+{
+	"env": {
+		"test": {
+			"plugins": [ "istanbul" ]
+		}
+	},
+	"presets": [
+		[      
+			"@babel/preset-env",
+			{
+				"targets": {
+					"node": "current"
+				}
+			}
+		],
+		"@babel/typescript"
+	],
+	"plugins": [
+		[
+			"babel-plugin-root-import",
+			{
+				"rootPathSuffix": "./src",
+				"rootPathPrefix": "~/"
+			}
+		],
+		[
+			"@babel/plugin-proposal-decorators", { 
+				"legacy": true 
+			}
+		],
+		[
+			"module-resolver", {
+				"root": ["./"],
+				"alias": {
+					"@base": ["./src"],
+          "@controllers": "./src/controllers",
+          "@utils": "./src/utils",
+          "@services": "./src/services",
+          "@decorators": "./src/decorators",
+          "@errors": "./src/errors",
+          "@middlewares": "./src/middlewares",
+          "@repositories": "./src/repositories",
+          "@config": "./src/config",
+          "@models": "./src/models",
+          "@schemas": "./src/schemas"
+				}
+			}
+		],
+		"@babel/plugin-proposal-class-properties",
+		"@babel/plugin-proposal-optional-chaining",
+		"@babel/plugin-proposal-object-rest-spread"
+	]
+}

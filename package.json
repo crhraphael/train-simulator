@@ -1,0 +1,58 @@
+{
+  "name": "train-simulator",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "engines": {
+    "node": "8"
+  },
+  "scripts": {
+    "prepare:env": "cp .env.example .env && cp .firebaserc.example .firebaserc",
+    "test:unit": "cross-env RUNNING_LOCAL=1 nyc --reporter -e .ts mocha --require tests/_index.js tests/unit/**/*.test.ts --recursive --all --timeout 2000",
+    "test:intg:app": "cross-env RUNNING_LOCAL=1 nyc --reporter -e .ts mocha --require tests/_index.js tests/integration/**/application.test.ts --recursive --all --timeout 5000",
+    "test:intg:services": "cross-env RUNNING_LOCAL=1 nyc --reporter -e .ts mocha --require tests/_index.js tests/integration/**/services.test.ts --recursive --all --timeout 20000",
+    "express:dev": "cross-env RUNNING_LOCAL=1 babel-watch --extensions .ts --watch ./src ./src/index.ts --production",
+    "build": "babel src -d build --copy-files --source-maps --extensions .ts"
+  },
+  "dependencies": {
+    "@babel/cli": "^7.8.4",
+    "@babel/core": "^7.8.4",
+    "@babel/plugin-proposal-class-properties": "^7.8.3",
+    "@babel/plugin-proposal-decorators": "^7.8.3",
+    "@babel/preset-env": "^7.8.4",
+    "@babel/preset-typescript": "^7.8.3",
+    "babel-plugin-istanbul": "^5.2.0",
+    "babel-plugin-module-resolver": "^3.2.0",
+    "babel-plugin-root-import": "^6.4.1",
+    "babel-polyfill": "^6.26.0",
+    "cross-env": "^6.0.3",
+    "dotenv": "^8.2.0"
+  },
+  "devDependencies": {
+    "@babel/plugin-proposal-optional-chaining": "^7.8.3",
+    "@babel/register": "^7.8.3",
+    "@istanbuljs/nyc-config-typescript": "^0.1.3",
+    "@types/chai": "^4.2.9",
+    "@types/mocha": "^5.2.7",
+    "@types/sinon": "^7.5.1",
+    "@typescript-eslint/eslint-plugin": "^2.19.2",
+    "@typescript-eslint/parser": "^2.19.2",
+    "babel-watch": "^7.0.0",
+    "chai": "^4.2.0",
+    "chalk": "^2.4.2",
+    "eslint": "^6.7.2",
+    "eslint-config-airbnb-typescript": "^6.3.2",
+    "eslint-import-resolver-babel-module": "^5.1.2",
+    "eslint-plugin-import": "^2.20.1",
+    "inquirer": "^7.0.4",
+    "mocha": "^6.2.1",
+    "nyc": "^14.1.1",
+    "sinon": "^7.5.0",
+    "supertest": "^4.0.2",
+    "typescript": "^3.7.5"
+  },
+	"contributors": [
+		"Crhistian R. <crhistian.raphael> (https://github.com/crhraphael/)"
+	],
+  "license": "ISC"
+}

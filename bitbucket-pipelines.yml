@@ -1,0 +1,50 @@
+image: node:8.16.2-jessie-slim
+definitions:
+  steps:
+    - step: &build-only
+        name: Build and create (no dev dependencies)
+        script:
+          - npm install --production
+          - npm run build
+          - cp .env.example build/.env && cp .env.example .env 
+        artifacts:
+          - build/**
+    - step: &build-test
+        name: Build and test (w/ dev dependencies)
+        script:
+          - npm install
+          - npm run build
+          - cp .env.example build/.env && cp .env.example .env
+          - npm run test:unit
+    - step: &upload
+        name: Deploy to Environment
+        deployment: please-specify
+        image: google/cloud-sdk:234.0.0
+        script:
+          - echo "${KEY_FILE}" | base64 -d >> /tmp/key-file.json
+          - cp package*.json build
+          - gcloud auth activate-service-account --key-file=/tmp/key-file.json
+          - gcloud functions deploy $FUNCTION_NAME --region $REGION --runtime $RUNTIME --source build --trigger-http --project $GCLOUD_PROJECT_ID
+pipelines:
+  pull-requests:
+    '**':
+      - step:
+          <<: *build-test
+  branches:
+    dev:
+      - step: 
+          <<: *build-only
+      - step: 
+          <<: *upload
+          name: Deploy to Development Environment
+          deployment: dev
+    hml:
+      - step: 
+          <<: *build-only
+      - step: 
+          <<: *upload
+          name: Deploy to Homolog Environment
+          deployment: hml
+    master:
+      - step: 
+          <<: *build-only
