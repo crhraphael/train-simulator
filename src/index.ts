@@ -1,5 +1,5 @@
-import Simulator from './Simulator';
-import { NormalHuman } from './Human';
+import Simulator from './Simulator/Simulator';
+import NormalHuman from './Humans/NormalHuman';
 
 const simulator = new Simulator();
 

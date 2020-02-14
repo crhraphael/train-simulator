@@ -1,17 +1,24 @@
 import chalk from 'chalk';
-import Spawner from './Spawner';
-import { ISimulatorObject } from './Human';
+import ISimulatorEntity from '../Simulator/ISimulatorEntity';
 
 export default class World {
 	width : number = 100;
 
 	height : number = 100;
 
-	objects : Array<ISimulatorObject> = [];
+	objects : Array<ISimulatorEntity> = [];
 
 	frame : number = 0;
 
-	addObject(obj : ISimulatorObject) {
+	matrix : Array<Array<number>> = [
+		[],
+	];
+
+	constructor() {
+		this.matrix = [];
+	}
+
+	addObject(obj : ISimulatorEntity) {
 		this.objects.push(obj);
 	}
 
@@ -19,5 +26,9 @@ export default class World {
 		console.log(chalk.blue(`World Frame ${this.frame}`));
 		console.log(chalk.blue(`Humans: ${this.objects.length}`));
 		this.frame++;
+	}
+
+	draw() {
+
 	}
 }

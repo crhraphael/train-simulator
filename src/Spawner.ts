@@ -1,15 +1,16 @@
-import AHuman, { Vector2, ISimulatorObject } from './Human';
+import Vector2 from './utils/Vector2';
+import ISimulatorEntity from './Simulator/ISimulatorEntity';
 
-export default class Spawner<AHuman extends ISimulatorObject> {
-	objectToBeSpawned : AHuman;
+export default class Spawner<SimulatorEntity extends ISimulatorEntity> {
+	objectToBeSpawned : SimulatorEntity;
 
 	position : Vector2;
 
-	constructor(obj : AHuman, position : Vector2) {
+	constructor(obj : SimulatorEntity, position : Vector2) {
 		this.objectToBeSpawned = obj;
 	}
 
-	spawn() : AHuman {
+	spawn() : SimulatorEntity {
 		return this.objectToBeSpawned;
 	}
 }

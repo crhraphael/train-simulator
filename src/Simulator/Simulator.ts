@@ -1,6 +1,5 @@
-import AHuman, { NormalHuman, Vector2, IHuman } from './Human';
-import World from './World';
-import Spawner from './Spawner';
+import World from '../World/World';
+import AHuman from '../Humans/AHuman';
 
 export default class Simulator {
 	timestep : number = 1000;
