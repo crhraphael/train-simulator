@@ -1,8 +1,10 @@
 import chalk from 'chalk';
-import ISimulatorEntity from '../Simulator/ISimulatorEntity';
 import ASimulatorEntity from '../Simulator/ASimulatorEntity';
+// import Mathf from '../utils/Mathf';
 
 export default class World extends ASimulatorEntity {
+	objects : Array<ASimulatorEntity> = [];
+
 	constructor() {
 		super();
 		for (let i = 0; i < this.width; i++) {
@@ -20,25 +22,38 @@ export default class World extends ASimulatorEntity {
 	update() {
 		console.log(chalk.blue(`World Frame ${this.frame}`));
 		console.log(chalk.blue(`Humans: ${this.objects.length}`));
+
+		this.objects.forEach((obj) => {
+			if (obj.update) {
+				obj.update();
+			}
+		});
 		this.frame++;
 	}
 
 	draw() {
-		console.clear();
-
-		process.stdout.write('\n');
 		process.stdout.write('\n');
 
-		this.matrix.map((l, line) => {
-			l.map((tile, column) => {
-				const char = (this.objects.filter((obj) => obj.position.x === line && obj.position.y === column)).length > 0
-					? 'x'
-					: 'o';
+		for (let line = 0; line <= this.height; line++) {
+			for (let column = 0; column <= this.width; column++) {
+				// const previousLine = Mathf.clamp(line - 1, 0, line);
+				// const previousColumn = Mathf.clamp(column - 1, 0, column);
+
+				let char = chalk.greenBright('o');
+				// process.stdout.cursorTo(previousLine, previousColumn);
+				// process.stdout.write(char);
+
+				process.stdout.cursorTo(line, column);
+
+				const objectsInPosition = this.objects.filter((obj) => obj.position.x === line && obj.position.y === column);
+				if (objectsInPosition.length) {
+					const firstObject = objectsInPosition[0];
+					char = firstObject.sprite
+						? firstObject.sprite
+						: char;
+				}
 				process.stdout.write(char);
-				return null;
-			});
-			process.stdout.write('\n');
-			return null;
-		});
+			}
+		}
 	}
 }

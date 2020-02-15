@@ -1,8 +1,8 @@
-import ISimulatorEntity from './ISimulatorEntity';
 import IDrawable from './IDrawable';
+import IUpdatable from './IUpdatable';
 import Vector2 from '../utils/Vector2';
 
-export default abstract class ASimulatorEntity implements IDrawable {
+export default abstract class ASimulatorEntity implements IUpdatable, IDrawable {
 	sprite : string = 'x';
 
 	position : Vector2;
@@ -10,8 +10,6 @@ export default abstract class ASimulatorEntity implements IDrawable {
 	width : number = 3;
 
 	height : number = 3;
-
-	objects : Array<ISimulatorEntity> = [];
 
 	frame : number = 0;
 
@@ -22,9 +20,6 @@ export default abstract class ASimulatorEntity implements IDrawable {
 	updateEverything() {
 		this.draw();
 		this.update();
-		this.objects.forEach((obj) => {
-			obj.update();
-		});
 	}
 
 	update() {

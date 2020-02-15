@@ -12,7 +12,11 @@ export default class Simulator {
 
 	inputListener : IInputListener;
 
+	private briefing : string;
+
 	constructor(inputListener : IInputListener) {
+		console.clear();
+
 		this.world = new World();
 		this.inputListener = inputListener;
 
