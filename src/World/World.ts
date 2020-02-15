@@ -3,24 +3,17 @@ import ISimulatorEntity from '../Simulator/ISimulatorEntity';
 import ASimulatorEntity from '../Simulator/ASimulatorEntity';
 
 export default class World extends ASimulatorEntity {
-	width : number = 100;
-
-	height : number = 100;
-
-	objects : Array<ISimulatorEntity> = [];
-
-	frame : number = 0;
-
-	matrix : Array<Array<number>> = [
-		[],
-	];
-
 	constructor() {
 		super();
-		this.matrix = [];
+		for (let i = 0; i < this.width; i++) {
+			this.matrix[i] = [];
+			for (let j = 0; j < this.height; j++) {
+				this.matrix[i][j] = 'o';
+			}
+		}
 	}
 
-	addObject(obj : ISimulatorEntity) {
+	addObject(obj : ASimulatorEntity) {
 		this.objects.push(obj);
 	}
 
@@ -31,6 +24,21 @@ export default class World extends ASimulatorEntity {
 	}
 
 	draw() {
+		console.clear();
 
+		process.stdout.write('\n');
+		process.stdout.write('\n');
+
+		this.matrix.map((l, line) => {
+			l.map((tile, column) => {
+				const char = (this.objects.filter((obj) => obj.position.x === line && obj.position.y === column)).length > 0
+					? 'x'
+					: 'o';
+				process.stdout.write(char);
+				return null;
+			});
+			process.stdout.write('\n');
+			return null;
+		});
 	}
 }
