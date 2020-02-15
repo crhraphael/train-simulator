@@ -1,7 +1,6 @@
 import World from '../World/World';
-import AHuman from '../Humans/AHuman';
+import AHuman from '../HumanEntity/AHuman';
 import IInputListener from './IInputListener';
-import InputListener from './InputListener';
 import GlobalInputListener from './GlobalInputListener';
 
 export default class Simulator {
@@ -11,14 +10,16 @@ export default class Simulator {
 
 	world : World;
 
-	private globalInputListener : GlobalInputListener;
-
 	inputListener : IInputListener;
 
 	constructor(inputListener : IInputListener) {
 		this.world = new World();
 		this.inputListener = inputListener;
-		this.globalInputListener = GlobalInputListener.GetInstance(this.inputListener);
+
+		/**
+		 * Initialize Singleton GlobalInputListener
+		 */
+		GlobalInputListener.GetInstance(this.inputListener);
 	}
 
 	addHuman(human : AHuman) {
@@ -31,7 +32,6 @@ export default class Simulator {
 			if (this.humans.length > 0) {
 				this.world.addObject(this.humans.shift());
 			}
-			// this.world.spawner = new Spawner<NormalHuman>(new NormalHuman(), new Vector2(1, 1));
 		}, this.timestep);
 	}
 }

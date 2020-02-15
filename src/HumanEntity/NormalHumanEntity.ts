@@ -1,7 +1,7 @@
-import HealthyHuman from './HealthyHuman';
+import AHealthyHuman from './AHealthyHuman';
 import Vector2 from '../utils/Vector2';
 
-export default class NormalHuman extends HealthyHuman {
+export default class NormalHumanEntity extends AHealthyHuman {
 	position : Vector2;
 
 	constructor(position? : Vector2) {
