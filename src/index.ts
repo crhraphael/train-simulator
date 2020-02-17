@@ -1,14 +1,27 @@
 import Simulator from './Simulator/Simulator';
 // import HealthyHumanEntity from './HumanEntity/HealthyHumanEntity';
 import InputListener from './Simulator/InputListener';
+import HealthyHumanEntity from './HumanEntity/HealthyHumanEntity';
+import Transform from './Simulator/Transform';
+import TerminalRenderer from './Simulator/TerminalRenderer';
 
 
 const simulator = new Simulator(new InputListener());
 
+const human = [
+	[' ', ' ', ' '],
+	[' ', 'O', ' '],
+	['/', 'T', '\\'],
+	[' ', 'M', ' '],
+	['/', ' ', '\\'],
+];
+simulator.addEntity(new HealthyHumanEntity(new Transform(0, 0), new TerminalRenderer(human)));
 simulator.start();
 
-
-
+process.on('exit', (code) => {
+	process.stdout.write('\u001b[?25h');
+	console.clear();
+});
 // // const exec = require('child_process').exec;
 // // const cmd = `node ${process.env.ENVIRONMENT === 'babel' ? 'src' : 'build'}/App.${process.env.ENVIRONMENT === 'babel' ? 'ts' : 'js'}`
 // // console.log('exec: ' + cmd);

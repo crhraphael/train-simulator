@@ -17,7 +17,7 @@ export default class InputListener implements IInputListener {
 		if (data.ctrl && data.name === 't') {
 			process.exit(0);
 		} else {
-			console.log('data', data);
+			process.stdout.write(JSON.stringify(data));
 		}
 	}
 }

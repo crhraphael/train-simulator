@@ -9,19 +9,17 @@ import GlobalRenderer from './GlobalRenderer';
 export default class Simulator {
 	timestep : number = 1000;
 
-	entities : Array<ASimulatorEntity> = []
-
-	renderer : any;
+	entities : Array<ASimulatorEntity> = [];
 
 	inputListener : IInputListener;
 
 	constructor(inputListener : IInputListener) {
 		console.clear();
-		console.log('simulation started')
+		console.log('simulation started');
 
 		this.inputListener = inputListener;
 
-		GlobalRenderer.GetInstance()
+		GlobalRenderer.GetInstance();
 
 		/**
 		 * Initialize Singleton GlobalInputListener
@@ -35,14 +33,18 @@ export default class Simulator {
 
 	start() {
 		setInterval(() => {
-			this.update()
+			console.clear();
+			process.stdout.cursorTo(0, 0);
 
+			GlobalRenderer.GetInstance().update();
+			this.update();
 		}, this.timestep);
 	}
 
 	update() {
 		this.entities.forEach((entity) => {
-			entity.update()
-		})
+			entity.renderer.draw();
+			entity.update();
+		});
 	}
 }

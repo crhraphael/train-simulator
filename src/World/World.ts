@@ -5,13 +5,13 @@ import Transform from '../Simulator/Transform';
 
 export default class World extends ASimulatorEntity {
 	objects : Array<ASimulatorEntity> = [];
-	
+
 	width : number = 3;
 
 	height : number = 3;
 
 	matrix : string[][] = [[]];
-	
+
 	constructor(transform : Transform) {
 		super(transform);
 		for (let i = 0; i < this.width; i++) {
@@ -27,9 +27,9 @@ export default class World extends ASimulatorEntity {
 	}
 
 	update() {
-		super.update()
-		console.log(chalk.blue(`World Frame ${this.frame}`));
-		console.log(chalk.blue(`Humans: ${this.objects.length}`));
+		super.update();
+		// console.log(chalk.blue(`World Frame ${this.frame}`));
+		// console.log(chalk.blue(`Humans: ${this.objects.length}`));
 
 		this.objects.forEach((obj) => {
 			if (obj.update) {
@@ -42,26 +42,26 @@ export default class World extends ASimulatorEntity {
 	draw() {
 		process.stdout.write('\n');
 
-		for (let line = 0; line <= this.height; line++) {
-			for (let column = 0; column <= this.width; column++) {
-				// const previousLine = Mathf.clamp(line - 1, 0, line);
-				// const previousColumn = Mathf.clamp(column - 1, 0, column);
+		// for (let line = 0; line <= this.height; line++) {
+		// 	for (let column = 0; column <= this.width; column++) {
+		// 		// const previousLine = Mathf.clamp(line - 1, 0, line);
+		// 		// const previousColumn = Mathf.clamp(column - 1, 0, column);
 
-				let char = chalk.greenBright('o');
-				// process.stdout.cursorTo(previousLine, previousColumn);
-				// process.stdout.write(char);
+		// 		let char = chalk.greenBright('o');
+		// 		// process.stdout.cursorTo(previousLine, previousColumn);
+		// 		// process.stdout.write(char);
 
-				process.stdout.cursorTo(line, column);
+		// 		process.stdout.cursorTo(line, column);
 
-				const objectsInPosition = this.objects.filter((obj) => obj.transform.position.x === line && obj.transform.position.y === column);
-				if (objectsInPosition.length) {
-					const firstObject = objectsInPosition[0];
-					char = firstObject.sprite
-						? firstObject.sprite
-						: char;
-				}
-				process.stdout.write(char);
-			}
-		}
+		// 		const objectsInPosition = this.objects.filter((obj) => obj.transform.position.x === line && obj.transform.position.y === column);
+		// 		if (objectsInPosition.length) {
+		// 			const firstObject = objectsInPosition[0];
+		// 			char = firstObject.sprite
+		// 				? firstObject.sprite
+		// 				: char;
+		// 		}
+		// 		process.stdout.write(char);
+		// 	}
+		// }
 	}
 }

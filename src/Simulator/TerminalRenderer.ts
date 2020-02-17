@@ -1,6 +1,5 @@
-import ARenderer from "./ARenderer";
-import chalk from "chalk";
-import Transform from "./Transform";
+import chalk from 'chalk';
+import ARenderer from './ARenderer';
 
 export default class TerminalRenderer extends ARenderer {
 	width : number = 0;
@@ -9,20 +8,47 @@ export default class TerminalRenderer extends ARenderer {
 
 	matrix : string[][] = [[]];
 
-  constructor() {
-    super()
-		for (let i = 0; i < this.width; i++) {
-			this.matrix[i] = [];
-			for (let j = 0; j < this.height; j++) {
-				this.matrix[i][j] = chalk.bgGreen(' ');
+	constructor()
+
+	constructor(sprite : string[][])
+
+	constructor(width : number, height : number)
+
+	constructor(width : any = process.stdout.columns, height = process.stdout.rows) {
+		super();
+
+		const sprite = (Array.isArray(width))
+			? width
+			: null;
+
+		this.matrix = sprite || [[]];
+
+		this.width = sprite ? sprite.length : height;
+		this.height = sprite ? sprite[sprite.length - 1].length : width;
+
+		if (this.matrix[this.matrix.length - 1].length === 0) {
+			for (let row = 0; row < this.width; row++) {
+				this.matrix[row] = [];
+				for (let column = 0; column < this.height; column++) {
+					this.matrix[row][column] = chalk.bgGreen(' ');
+				}
 			}
 		}
-  }
+	}
 
-  createTemplate(string) {
+	draw() {
+		let stdout = '';
+		process.stdout.cursorTo(0, 0);
 
-  }
+		for (let row = 0; row < this.width; row++) {
+			for (let column = 0; column < this.height; column++) {
+				stdout += this.matrix[row][column];
+			}
+			stdout += '\n';
+		}
+		stdout = stdout.substr(0, stdout.length - 1);
 
-  draw() {
-  }
+		process.stdout.write(stdout);
+		process.stdout.write('\u001b[?25l');
+	}
 }

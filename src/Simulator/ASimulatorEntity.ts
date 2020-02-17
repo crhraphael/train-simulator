@@ -1,11 +1,10 @@
 import IDrawable from './IDrawable';
 import IUpdatable from './IUpdatable';
-import GlobalRenderer from './GlobalRenderer';
 import ARenderer from './ARenderer';
 import Transform from './Transform';
 
 export default abstract class ASimulatorEntity implements IUpdatable, IDrawable {
-	sprite : string = 'x';
+	sprite : string[][] = [[]];
 
 	transform : Transform;
 
@@ -13,12 +12,10 @@ export default abstract class ASimulatorEntity implements IUpdatable, IDrawable 
 
 	renderer : ARenderer;
 
-	constructor(transform : Transform) {
+	constructor(transform : Transform, renderer? : ARenderer) {
 		this.transform = transform;
-		this.renderer = GlobalRenderer.GetInstance().getRenderer();
+		this.renderer = renderer;
 	}
 
-	update() {
-		this.renderer.draw(this.transform);
-	}
+	update() {}
 }

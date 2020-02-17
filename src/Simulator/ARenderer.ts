@@ -1,16 +1,13 @@
-import terminal, { Terminal } from 'terminal-kit'
+import terminal, { Terminal } from 'terminal-kit';
 import Transform from './Transform';
 
 export default class ARenderer {
-  window : any;
-  constructor() {
-    this.window = terminal.createTerminal({
-      appId: 'TrainSimulatorWindow',
-      appName: 'Train Simulator Window'
-    })
-  }
+	width : number;
 
-  draw(transform : Transform) {
+	height : number;
 
-  }
+	matrix : string[][];
+
+
+	draw() {}
 }

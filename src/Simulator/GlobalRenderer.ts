@@ -1,4 +1,3 @@
-import ASimulatorEntity from './ASimulatorEntity';
 import ARenderer from './ARenderer';
 import TerminalRenderer from './TerminalRenderer';
 
@@ -7,10 +6,12 @@ import TerminalRenderer from './TerminalRenderer';
  */
 export default class GlobalRenderer {
 	private static instance : GlobalRenderer;
-  private renderer : ARenderer;
+
+	private renderer : ARenderer;
+
 	private constructor() {
 		GlobalRenderer.instance = this;
-		this.renderer = new TerminalRenderer()
+		this.renderer = new TerminalRenderer(process.stdout.columns, process.stdout.rows);
 	}
 
 	static GetInstance() {
@@ -20,7 +21,13 @@ export default class GlobalRenderer {
 
 		return GlobalRenderer.instance;
 	}
-	
+
+	update() {
+		if (this.renderer) {
+			this.renderer.draw();
+		}
+	}
+
 	getRenderer() : ARenderer {
 		return this.renderer;
 	}
