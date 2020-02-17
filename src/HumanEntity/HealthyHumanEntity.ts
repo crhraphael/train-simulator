@@ -1,6 +1,7 @@
 import chalk from 'chalk';
 import AHuman from './AHuman';
 import Vector2 from '../utils/Vector2';
+import Transform from '../Simulator/Transform';
 
 /**
  * A simple healthy human.
@@ -10,10 +11,16 @@ export default class HealthyHumanEntity extends AHuman {
 
 	readonly sprite : string = chalk.hex('77ddff')('H');
 
-	constructor(position? : Vector2) {
-		super();
-		this.position = position || new Vector2(1, 1);
+
+	constructor(transform : Transform) {
+		super(transform);
+		this.renderer
 	}
+
+	update() {
+		super.update()
+	}
+
 
 	draw() {
 		return this.sprite;

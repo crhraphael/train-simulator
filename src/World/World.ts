@@ -1,12 +1,19 @@
 import chalk from 'chalk';
 import ASimulatorEntity from '../Simulator/ASimulatorEntity';
+import Transform from '../Simulator/Transform';
 // import Mathf from '../utils/Mathf';
 
 export default class World extends ASimulatorEntity {
 	objects : Array<ASimulatorEntity> = [];
+	
+	width : number = 3;
 
-	constructor() {
-		super();
+	height : number = 3;
+
+	matrix : string[][] = [[]];
+	
+	constructor(transform : Transform) {
+		super(transform);
 		for (let i = 0; i < this.width; i++) {
 			this.matrix[i] = [];
 			for (let j = 0; j < this.height; j++) {
@@ -20,6 +27,7 @@ export default class World extends ASimulatorEntity {
 	}
 
 	update() {
+		super.update()
 		console.log(chalk.blue(`World Frame ${this.frame}`));
 		console.log(chalk.blue(`Humans: ${this.objects.length}`));
 
@@ -45,7 +53,7 @@ export default class World extends ASimulatorEntity {
 
 				process.stdout.cursorTo(line, column);
 
-				const objectsInPosition = this.objects.filter((obj) => obj.position.x === line && obj.position.y === column);
+				const objectsInPosition = this.objects.filter((obj) => obj.transform.position.x === line && obj.transform.position.y === column);
 				if (objectsInPosition.length) {
 					const firstObject = objectsInPosition[0];
 					char = firstObject.sprite

@@ -6,8 +6,4 @@ export default abstract class AHuman extends ASimulatorEntity implements IWalkab
 	position: Vector2;
 
 	name: string;
-
-	update() {
-
-	}
 }

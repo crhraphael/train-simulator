@@ -11,9 +11,10 @@
     "test:unit": "cross-env RUNNING_LOCAL=1 nyc --reporter -e .ts mocha --require tests/_index.js tests/unit/**/*.test.ts --recursive --all --timeout 2000",
     "test:intg:app": "cross-env RUNNING_LOCAL=1 nyc --reporter -e .ts mocha --require tests/_index.js tests/integration/**/application.test.ts --recursive --all --timeout 5000",
     "test:intg:services": "cross-env RUNNING_LOCAL=1 nyc --reporter -e .ts mocha --require tests/_index.js tests/integration/**/services.test.ts --recursive --all --timeout 20000",
-    "watch:dev": "cross-env RUNNING_LOCAL=1 babel-watch --extensions .ts --watch ./src ./src/index.ts --production",
+    "babel:dev": "cross-env ENVIRONMENT=babel babel-watch --extensions .ts --watch ./src ./src/index.ts --production",
+    "babel:app": "cross-env ENVIRONMENT=babel babel-watch --extensions .ts --watch ./src ./src/App.ts --production",
     "prenode:dev": "npm run build",
-    "node:dev": "cross-env RUNNING_LOCAL=1 node ./build/index.js",
+    "node:dev": "cross-env ENVIRONMENT=node node ./build/index.js",
     "build": "babel src -d build --copy-files --source-maps --extensions .ts"
   },
   "dependencies": {
@@ -28,7 +29,8 @@
     "babel-plugin-root-import": "^6.4.1",
     "babel-polyfill": "^6.26.0",
     "cross-env": "^6.0.3",
-    "dotenv": "^8.2.0"
+    "dotenv": "^8.2.0",
+    "terminal-kit": "^1.33.6"
   },
   "devDependencies": {
     "@babel/plugin-proposal-optional-chaining": "^7.8.3",
@@ -38,6 +40,7 @@
     "@types/mocha": "^5.2.7",
     "@types/node": "^13.7.1",
     "@types/sinon": "^7.5.1",
+    "@types/terminal-kit": "^1.28.0",
     "@typescript-eslint/eslint-plugin": "^2.19.2",
     "@typescript-eslint/parser": "^2.19.2",
     "babel-watch": "^7.0.0",

@@ -1,24 +1,27 @@
-import World from '../World/World';
-import AHuman from '../HumanEntity/AHuman';
 import IInputListener from './IInputListener';
 import GlobalInputListener from './GlobalInputListener';
+import ASimulatorEntity from './ASimulatorEntity';
+import GlobalRenderer from './GlobalRenderer';
 
+/**
+ * Estrutura principal do simulador.
+ */
 export default class Simulator {
 	timestep : number = 1000;
 
-	humans : Array<AHuman> = [];
+	entities : Array<ASimulatorEntity> = []
 
-	world : World;
+	renderer : any;
 
 	inputListener : IInputListener;
 
-	private briefing : string;
-
 	constructor(inputListener : IInputListener) {
 		console.clear();
+		console.log('simulation started')
 
-		this.world = new World();
 		this.inputListener = inputListener;
+
+		GlobalRenderer.GetInstance()
 
 		/**
 		 * Initialize Singleton GlobalInputListener
@@ -26,16 +29,20 @@ export default class Simulator {
 		GlobalInputListener.GetInstance(this.inputListener);
 	}
 
-	addHuman(human : AHuman) {
-		this.humans.push(human);
+	addEntity(entity : ASimulatorEntity) {
+		this.entities.push(entity);
 	}
 
 	start() {
 		setInterval(() => {
-			this.world.updateEverything();
-			if (this.humans.length > 0) {
-				this.world.addObject(this.humans.shift());
-			}
+			this.update()
+
 		}, this.timestep);
+	}
+
+	update() {
+		this.entities.forEach((entity) => {
+			entity.update()
+		})
 	}
 }

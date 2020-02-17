@@ -16,7 +16,7 @@ export default class GlobalInputListener implements IInputListener {
 		this.simulatorInputListener = inputListener;
 
 		readline.emitKeypressEvents(process.stdin);
-		process.stdin.setRawMode(true);
+		// process.stdin.setRawMode(true);
 
 		process.stdin.on('keypress', this.onKeyPress);
 		GlobalInputListener.instance = this;

@@ -1,32 +1,24 @@
 import IDrawable from './IDrawable';
 import IUpdatable from './IUpdatable';
-import Vector2 from '../utils/Vector2';
+import GlobalRenderer from './GlobalRenderer';
+import ARenderer from './ARenderer';
+import Transform from './Transform';
 
 export default abstract class ASimulatorEntity implements IUpdatable, IDrawable {
 	sprite : string = 'x';
 
-	position : Vector2;
-
-	width : number = 3;
-
-	height : number = 3;
+	transform : Transform;
 
 	frame : number = 0;
 
-	matrix : string[][] = [
-		[],
-	];
+	renderer : ARenderer;
 
-	updateEverything() {
-		this.draw();
-		this.update();
+	constructor(transform : Transform) {
+		this.transform = transform;
+		this.renderer = GlobalRenderer.GetInstance().getRenderer();
 	}
 
 	update() {
-
-	}
-
-	draw() {
-
+		this.renderer.draw(this.transform);
 	}
 }
