@@ -43,7 +43,7 @@ export default class Simulator {
 
 	update() {
 		this.entities.forEach((entity) => {
-			entity.renderer.draw();
+			entity.renderer.draw(entity.transform.position);
 			entity.update();
 		});
 	}

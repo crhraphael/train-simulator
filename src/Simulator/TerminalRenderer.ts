@@ -1,5 +1,6 @@
 import chalk from 'chalk';
 import ARenderer from './ARenderer';
+import Vector2 from '../utils/Vector2';
 
 export default class TerminalRenderer extends ARenderer {
 	width : number = 0;
@@ -36,19 +37,23 @@ export default class TerminalRenderer extends ARenderer {
 		}
 	}
 
-	draw() {
+	draw(position? : Vector2) {
 		let stdout = '';
-		process.stdout.cursorTo(0, 0);
+
+		const pos = position || new Vector2(0, 0);
+		process.stdout.cursorTo(pos.x, pos.y);
 
 		for (let row = 0; row < this.width; row++) {
 			for (let column = 0; column < this.height; column++) {
 				stdout += this.matrix[row][column];
+				process.stdout.write(this.matrix[row][column]);
 			}
+			process.stdout.moveCursor(-this.matrix[row].length, 1);
 			stdout += '\n';
 		}
-		stdout = stdout.substr(0, stdout.length - 1);
+		// stdout = stdout.substr(0, stdout.length - 1);
 
-		process.stdout.write(stdout);
+		// process.stdout.write(stdout);
 		process.stdout.write('\u001b[?25l');
 	}
 }

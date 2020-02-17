@@ -1,5 +1,6 @@
 import terminal, { Terminal } from 'terminal-kit';
 import Transform from './Transform';
+import Vector2 from '../utils/Vector2';
 
 export default class ARenderer {
 	width : number;
@@ -9,5 +10,5 @@ export default class ARenderer {
 	matrix : string[][];
 
 
-	draw() {}
+	draw(position? : Vector2) {}
 }

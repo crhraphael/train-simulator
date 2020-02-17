@@ -15,7 +15,7 @@ const human = [
 	[' ', 'M', ' '],
 	['/', ' ', '\\'],
 ];
-simulator.addEntity(new HealthyHumanEntity(new Transform(0, 0), new TerminalRenderer(human)));
+simulator.addEntity(new HealthyHumanEntity(new Transform(8, 4), new TerminalRenderer(human)));
 simulator.start();
 
 process.on('exit', (code) => {
