@@ -1,5 +1,6 @@
 import ARenderer from './ARenderer';
 import TerminalRenderer from './TerminalRenderer';
+import CanvasRenderer2D from './CanvasRenderer2D';
 
 /**
  * Renderizador do Simulador.
@@ -11,7 +12,7 @@ export default class GlobalRenderer {
 
 	private constructor() {
 		GlobalRenderer.instance = this;
-		this.renderer = new TerminalRenderer(process.stdout.columns, process.stdout.rows);
+		this.renderer = new CanvasRenderer2D(512, 512);
 	}
 
 	static GetInstance() {
